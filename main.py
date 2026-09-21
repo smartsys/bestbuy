@@ -1,16 +1,17 @@
 import store
-import product
+import products
 
 # setup initial stock of inventory
-product_list = [product.Product("MacBook Air M2", price=1450, quantity=100),
-                product.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
-                product.Product("Google Pixel 7", price=500, quantity=250)
+product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
+                products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
+                products.Product("Google Pixel 7", price=500, quantity=250)
                 ]
 
 best_buy = store.Store(product_list)
 
 
 def list_products(store_obj):
+    """Print and return all active products."""
     active_products = store_obj.get_all_products()
     print("------")
     for index, item in enumerate(active_products, start=1):
@@ -20,6 +21,7 @@ def list_products(store_obj):
 
 
 def make_order(store_obj):
+    """Ask for products and amounts, then place the order."""
     active_products = list_products(store_obj)
     print("When you want to finish order, enter empty text.")
     shopping_list = []
@@ -40,6 +42,7 @@ def make_order(store_obj):
 
 
 def start(store_obj):
+    """Show the store menu."""
     while True:
         print("\n   Store Menu")
         print("   ----------")
