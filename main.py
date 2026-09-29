@@ -31,11 +31,24 @@ def make_order(store_obj):
         amount_input = input("What amount do you want? ")
         if product_input == "" or amount_input == "":
             break
-        shopping_list.append((active_products[int(product_input) - 1], int(amount_input)))
+        try:
+            product_index = int(product_input) - 1
+            amount = int(amount_input)
+        except ValueError:
+            print("Please enter whole numbers only.")
+            continue
+        if not 0 <= product_index < len(active_products):
+            print("*** Invalid product number ***")
+            continue
+        shopping_list.append((active_products[product_index], amount))
         print("Product added to list!")
         print()
 
-    total_price = store_obj.order(shopping_list)
+    try:
+        total_price = store_obj.order(shopping_list)
+    except ValueError as error:
+        print(f"Error while making order! {error}")
+        return
 
     print("********")
     print(f"Order made! Total payment: ${total_price:.2f}")
